@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
+use App\Livewire\Admin\Dashboard;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -17,6 +19,10 @@ Route::controller(HomeController::class)->group(function(){
     Route::get('/travel', 'travel')->name('travel');
     Route::get('/contact', 'contact')->name('contact');
     Route::get('/faqs', 'faqs')->name('faqs');
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/dashboard', Dashboard::class)->name('admin.dashboard');
 });
 
 Route::get('/dashboard', function () {
