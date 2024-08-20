@@ -213,13 +213,13 @@
                   <li class="sidebar-list"><i class="fa fa-thumb-tack"></i>
                     <a class="sidebar-link sidebar-title" href="#">
                       <span><i data-feather="users"></i></span>
-                      <span>Vendors</span>
+                      <span>Providers</span>
                     </a>
                     <ul class="sidebar-submenu">
-                      <li><a class="lan-22" href="#">All Vendors</a></li>
-                      <li><a class="lan-23" href="#">Pending Vendors</a></li>
-                      <li><a class="lan-24" href="#">Active Vendors</a></li>
-                      <li><a class="lan-25" href="#">Cancelled Vendors</a></li>
+                      <li><a class="lan-22" href="#">All Providers</a></li>
+                      <li><a class="lan-23" href="#">Pending Providers</a></li>
+                      <li><a class="lan-24" href="#">Active Providers</a></li>
+                      <li><a class="lan-25" href="#">Cancelled Providers</a></li>
                     </ul>
                   </li>
 
@@ -487,5 +487,108 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('admin/js/script.js') }}"></script>
+    <script>
+        var optionsactivity = {
+            series: [
+            {
+                name: "Visitors",
+                data: [200, 405, 250, 150, 50, 100, 40],
+            },
+            ],
+            chart: {
+            height: 300,
+            type: "bar",
+            toolbar: {
+                show: false,
+            },
+            dropShadow: {
+                enabled: true,
+                top: 10,
+                left: 0,
+                blur: 5,
+                color: "#7064F5",
+                opacity: 0.35,
+            },
+            },
+            plotOptions: {
+            bar: {
+                borderRadius: 6,
+                columnWidth: "30%",
+            },
+            },
+            dataLabels: {
+            enabled: false,
+            },
+            xaxis: {
+            categories: ["S", "M", "T", "W", "T", "F", "S"],
+            labels: {
+                style: {
+                fontSize: "12px",
+                fontFamily: "Rubik, sans-serif",
+                colors: "var(--chart-text-color)",
+                },
+            },
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+            tooltip: {
+                enabled: false,
+            },
+            },
+            yaxis: {
+            axisBorder: {
+                show: false,
+            },
+            axisTicks: {
+                show: false,
+            },
+            labels: {
+                formatter: function (val) {
+                return val + " " + "Visitor";
+                },
+                style: {
+                fontSize: "12px",
+                fontFamily: "Rubik, sans-serif",
+                colors: "var(--chart-text-color)",
+                },
+            },
+            },
+            grid: {
+            borderColor: "var(--chart-dashed-border)",
+            strokeDashArray: 5,
+            },
+            colors: ["#7064F5", "#8D83FF"],
+            fill: {
+            type: "gradient",
+            gradient: {
+                shade: "light",
+                type: "vertical",
+                gradientToColors: ["#7064F5", "#8D83FF"],
+                opacityFrom: 0.98,
+                opacityTo: 0.85,
+                stops: [0, 100],
+            },
+            },
+            responsive: [
+            {
+                breakpoint: 1200,
+                options: {
+                chart: {
+                    height: 200,
+                },
+                },
+            },
+            ],
+        };
+
+         var chartactivity = new ApexCharts(
+            document.querySelector("#activity-chart"),
+            optionsactivity
+        );
+        chartactivity.render();
+    </script>
   </body>
 </html>
