@@ -22,6 +22,7 @@ return new class extends Migration
             $table->text('address')->nullable();
             $table->longText('details')->nullable();
             $table->string('kyc')->nullable();
+            $table->unsignedBigInteger('identity_type')->nullable();
             $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('restrict');
             $table->timestamps();
         });
