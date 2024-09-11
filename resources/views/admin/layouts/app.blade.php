@@ -41,7 +41,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/vendors/bootstrap.css') }}">
     <!-- App css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/style.css') }}">
-    <link id="color" rel="stylesheet" href="{{ asset('admin/css/color-3.css') }}" media="screen">
+    <link id="color" rel="stylesheet" href="{{ asset('admin/css/color-1.css') }}" media="screen">
     <!-- Responsive css-->
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/responsive.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin/css/toastr.css') }}">
@@ -103,6 +103,16 @@
     <script src="{{ asset('admin/js/slick/slick.min.js') }}"></script>
     <script src="{{ asset('admin/js/slick/slick.js') }}"></script>
     <script src="{{ asset('admin/js/header-slick.js') }}"></script>
+
+    <script src="{{ asset('admin/js/dropzone/dropzone.js') }}"></script>
+    <script src="{{ asset('admin/js/dropzone/dropzone-script.js') }}"></script>
+    <script src="{{ asset('admin/js/filepond/filepond-plugin-image-preview.js') }}"></script>
+    <script src="{{ asset('admin/js/filepond/filepond-plugin-file-rename.js') }}"></script>
+    <script src="{{ asset('admin/js/filepond/filepond-plugin-image-transform.js') }}"></script>
+    <script src="{{ asset('admin/js/filepond/filepond.js') }}"></script>
+    <script src="{{ asset('admin/js/filepond/custom-filepond.js') }}"></script>
+    <script src="{{ asset('admin/js/tooltip-init.js') }}"></script>
+
     <script src="{{ asset('admin/js/touchspin/vendors.min.js') }}"></script>
     <script src="{{ asset('admin/js/touchspin/touchspin.js') }}"></script>
     <script src="{{ asset('admin/js/touchspin/input-groups.min.js') }}"></script>
@@ -133,6 +143,7 @@
     <!-- Plugins JS Ends-->
     <!-- Theme js-->
     <script src="{{ asset('admin/js/script.js') }}"></script>
+
     @yield('scripts')
     <script>
         $.ajaxSetup({

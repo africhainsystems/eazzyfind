@@ -99,7 +99,7 @@
                       <span>Pages</span>
                     </a>
                     <ul class="sidebar-submenu">
-                      <li><a class="lan-" href="#">All Pages</a></li>
+                      <li><a class="lan-" href="{{ route('admin.pages') }}">All Pages</a></li>
                       <li><a class="lan-" href="#">Add Pages</a></li>
                     </ul>
                   </li>

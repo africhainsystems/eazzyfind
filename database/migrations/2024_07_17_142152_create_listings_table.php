@@ -16,9 +16,13 @@ return new class extends Migration
             $table->string('title');
             $table->string('slug');
             $table->longText('description');
+            $table->string('listing_banner')->nullable();
+            $table->string('meta_title')->nullable();
             $table->string('meta_keyword')->nullable();
             $table->string('meta_description')->nullable();
+            $table->string('meta_thumbail')->nullable();
             $table->string('address')->nullable();
+            $table->string('phone')->nullable();
             $table->unsignedBigInteger('vendor_id');
             $table->unsignedBigInteger('category_id');
             $table->string('feature_image')->nullable();

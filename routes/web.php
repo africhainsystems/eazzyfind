@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\ListingsCategory;
 use App\Http\Controllers\Admin\Listings;
 use App\Http\Controllers\Admin\VendorsController;
 use App\Http\Controllers\Admin\Reviews;
+use App\Http\Controllers\Admin\Pages;
 
 use App\Livewire\Admin\Dashboard;
 
@@ -45,6 +46,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/listings/pending', 'pendingListings')->name('admin.listings.pending');
         Route::get('/listings/inactive', 'inactiveListings')->name('admin.listings.inactive');
         Route::get('/listings/add', 'addListings')->name('admin.listings.add');
+        Route::post('/listings/save', 'saveListings')->name('admin.listings.save');
+        Route::get('/listings/{id}/edit', 'editListings')->name('admin.listings.edit');
+        Route::post('/listings/{id}/update', 'updateListings')->name('admin.listings.update');
+        Route::get('/listings/{id}/details', 'listingsDetails');
+        Route::post('/listings/delete', 'deleteListing');
+        Route::post('/listings/update-visibility', 'updateListingVisibility');
+        Route::post('/listings/update-status', 'updateListingStatus');
     });
 
     Route::controller(Reviews::class)->group(function(){
@@ -72,6 +80,13 @@ Route::prefix('admin')->group(function () {
         Route::post('/identityform/update', 'updateForm');
         Route::post('/identityform/delete', 'deleteForm');
     });
+
+    Route::controller(Pages::class)->group(function(){
+        Route::get('/pages', 'index')->name('admin.pages');
+        Route::get('/pages/add', 'addPage')->name('admin.pages.add');
+        Route::post('/pages/save', 'savePage');
+    });
+
 });
 
 Route::get('/dashboard', function () {

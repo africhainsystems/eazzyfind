@@ -29,9 +29,9 @@
             <div class="col-12 file-content">
                 <div class="media float-end mb-3">
                     <div class="media-body text-end">
-                        <div class="btn btn-pill btn-air btn-primary" data-bs-toggle="modal" data-bs-target="#add"> <i
+                        <a href="{{ route('admin.listings.add') }}" class="btn btn-pill btn-air btn-primary"> <i
                                 data-feather="plus-square"></i>Create New
-                        </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -65,12 +65,11 @@
         </div>
     </div>
 
-    {{-- Add Model --}}
-    @include('admin.listing.category.models.add')
-    {{-- Edit Model --}}
-    @include('admin.listing.category.models.edit')
+    {{-- Update --}}
+    @include('admin.listing.models.update-status')
+    @include('admin.listing.models.update-visibility')
     {{-- Delete --}}
-    @include('admin.listing.category.models.delete')
+    @include('admin.listing.models.delete')
 
 @section('scripts')
     <script src="{{ asset('admin/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
@@ -136,45 +135,35 @@
                 ]
             });
 
-            // Add
-            $('#addForm').on('submit', function(e){
-                e.preventDefault();
-                var formData = new FormData(this);
+            // Edit
+            $('#customTable').on('click', '.update-visibility', function(){
+                var id = $(this).data('id');
                 $.ajax({
-                    url: '/admin/listing/category/add',
-                    type: 'POST',
-                    data: formData,
-                    contentType: false,
-                    processData: false,
+                    url: '/admin/listings/'+id+'/details',
+                    type: 'GET',
+                    dataType: 'json',
                     success: function(response){
-                        $('#add').modal('hide');
-                        if(response.success){
-                            toastr.success(response.success);
-                            $('#addForm')[0].reset();
-                            $('#customTable').DataTable().ajax.reload();
-                        }else{
-                            toastr.error(response.error);
-                        }
-
+                        // populate modal form with the data received
+                        $('#editvisibilityid').val(response.id);
+                        $('#visibility').val(response.visibility);
+                        $('#editVisibility').modal('show');
                     },error: function(error){
-                        toastr.error("Error adding data");
+                        toastr.error("Error fetching data");
                     }
                 });
             });
 
-            // Edit
-            $('#customTable').on('click', '.edit-data', function(){
+            $('#customTable').on('click', '.update-status', function(){
                 var id = $(this).data('id');
                 $.ajax({
-                    url: '/admin/listing/category/'+id+'/details',
+                    url: '/admin/listings/'+id+'/details',
                     type: 'GET',
                     dataType: 'json',
                     success: function(response){
                         // populate modal form with the data received
                         $('#editid').val(response.id);
-                        $('#editname').val(response.name);
-                        $('#editphoto').val(response.image);
-                        $('#edit').modal('show');
+                        $('#status').val(response.status);
+                        $('#editStatus').modal('show');
                     },error: function(error){
                         toastr.error("Error fetching data");
                     }
@@ -182,17 +171,41 @@
             });
 
             // Update
-            $('#editForm').on('submit', function(e){
+            $('#editVisibilityForm').on('submit', function(e){
                 e.preventDefault();
                 var formData = new FormData(this);
                 $.ajax({
-                    url: '/admin/listing/category/update',
+                    url: '/admin/listings/update-visibility',
                     type: 'POST',
                     data: formData,
                     contentType: false,
                     processData: false,
                     success: function(response){
-                        $('#edit').modal('hide');
+                        $('#editVisibility').modal('hide');
+                        if(response.success){
+                            toastr.success(response.success);
+                        }else{
+                            toastr.error(response.error);
+                        }
+                        $('#customTable').DataTable().ajax.reload();
+                    },error: function(error){
+                        toastr.error("Error processing request");
+                        $('#customTable').DataTable().ajax.reload();
+                    }
+                });
+            });
+
+            $('#editStatusForm').on('submit', function(e){
+                e.preventDefault();
+                var formData = new FormData(this);
+                $.ajax({
+                    url: '/admin/listings/update-status',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(response){
+                        $('#editStatus').modal('hide');
                         if(response.success){
                             toastr.success(response.success);
                         }else{
@@ -210,7 +223,7 @@
             $('#customTable').on('click', '.delete-data', function(){
                 var id = $(this).data('id');
                 $.ajax({
-                    url: '/admin/listing/category/'+id+'/details',
+                    url: '/admin/listings/'+id+'/details',
                     type: 'GET',
                     dataType: 'json',
                     success: function(response){
@@ -230,7 +243,7 @@
                     'id': $('#deleteId').val(),
                 }
                 $.ajax({
-                    url: '/admin/listing/category/delete',
+                    url: '/admin/listings/delete',
                     type: 'POST',
                     data: data,
                     dataType: 'json',
@@ -240,30 +253,6 @@
                         $('#customTable').DataTable().ajax.reload();
                     },error: function(error){
                         toastr.error("Error processing request");
-                    }
-                });
-            });
-
-            // Change status
-            $('#customTable').on('click', '.toggle-status', function(){
-                var dept_id = $(this).data('id');
-                $.ajax({
-                    type: "POST",
-                    dataType: "json",
-                    url: "/admin/listing/category/changeStatus",
-                    data: {'id' : dept_id},
-                    success: function(data){
-
-                        if($.isEmptyObject(data.error)){
-                            toastr.success(data.success);
-                            $('#customTable').DataTable().ajax.reload();
-                        }else{
-                            toastr.error('Error updating data');
-                            $('#customTable').DataTable().ajax.reload();
-                        }
-                    },error: function(error){
-                        toastr.error("Error processing request");
-                        $('#customTable').DataTable().ajax.reload();
                     }
                 });
             });

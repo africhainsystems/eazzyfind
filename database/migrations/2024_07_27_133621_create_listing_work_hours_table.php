@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('listing_id');
             $table->string('day');
-            $table->string('time')->nullable();
+            $table->string('open_time')->nullable();
+            $table->string('close_time')->nullable();
             $table->foreign('listing_id')->references('id')->on('listings')->onDelete('restrict');
             $table->timestamps();
         });

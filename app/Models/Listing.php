@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Listing extends Model
 {
@@ -13,9 +14,13 @@ class Listing extends Model
         'title',
         'slug',
         'description',
+        'listing_banner',
+        'meta_title',
         'meta_keyword',
         'meta_description',
+        'meta_thumbnail',
         'address',
+        'phone',
         'vendor_id',
         'category_id',
         'feature_image',
